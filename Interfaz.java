@@ -4,7 +4,7 @@
 * CC2008
 * AUTOR: Denil Parada
 * FECHA: 26/09/2024 
-* DESCRIPCION: Clase que interactúa con el usuario para mostrar los detalles de los mamíferos y calcular su alimentación.
+* DESCRIPCION: Clase que interactúa con el usuario para ingresar y calcular el presupuesto necesario para aceptar un animal.
 */
 import java.util.Scanner;
 
@@ -13,78 +13,151 @@ public class Interfaz {
         Gestionador gestionador = new Gestionador();
         Scanner scanner = new Scanner(System.in);
 
-        // Creación de los animales (3 felinos y 3 primates)
-        Felinos gatoMontes = new Felinos("Lynx rufus", "Bosques", 15, 18.5, 2, true, "gato montes", "marrón moteado");
-        Felinos puma = new Felinos("Puma concolor", "Montañas", 12, 60, 3, true, "puma", "gris");
-        Felinos leopardo = new Felinos("Panthera pardus", "Selvas", 17, 70, 3, false, "leopardo", "amarillo con manchas negras");
+        // Paso 1: Ingresar el presupuesto anual
+        System.out.print("Ingrese el presupuesto anual: ");
+        double presupuesto = scanner.nextDouble();
+        scanner.nextLine();  // Consumir el salto de línea
 
-        Primates monoCapuchino = new Primates("Cebus capucinus", "Selvas", 25, 3.5, 6, false, "mono capuchino", 90);
-        Primates monoArdilla = new Primates("Saimiri sciureus", "Selva tropical", 12, 1.1, 5, false, "mono ardilla", 70);
-        Primates tamarin = new Primates("Saguinus oedipus", "Selva tropical", 13, 0.5, 5, true, "tamarin", 80);
+        // Paso 2: Preguntar si es felino o primate
+        System.out.print("¿El animal es un Felino o Primate? (F/P): ");
+        char tipoAnimal = scanner.nextLine().toUpperCase().charAt(0);
 
-        // Agregar los animales al gestionador
-        gestionador.agregarFelino("gato montes", gatoMontes);
-        gestionador.agregarFelino("puma", puma);
-        gestionador.agregarFelino("leopardo", leopardo);
-        gestionador.agregarPrimate("mono capuchino", monoCapuchino);
-        gestionador.agregarPrimate("mono ardilla", monoArdilla);
-        gestionador.agregarPrimate("tamarin", tamarin);
+        Mamifero mamifero = null;  // Declarar el mamífero
 
-        // Menú para interactuar con el usuario
-        int opcion = 0;
-        do {
-            System.out.println("\nSeleccione una especie para ver los detalles:");
-            System.out.println("Felinos:");
-            System.out.println("1. Gato montés");
-            System.out.println("2. Puma");
-            System.out.println("3. Leopardo");
-            System.out.println("\nPrimates:");
-            System.out.println("4. Mono capuchino");
-            System.out.println("5. Mono ardilla");
-            System.out.println("6. Tamarin");
-            System.out.println("\n7. Salir");
-            System.out.print("Elija una opción: ");
-            opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+        if (tipoAnimal == 'F') {
+            // Si es felino, ingresar datos específicos del felino
+            System.out.println("\n============================");
+            System.out.println("  Ingrese los datos del felino");
+            System.out.println("============================");
 
-            switch (opcion) {
-                case 1:
-                    mostrarDetallesYCalcularAlimento(gestionador, "gato montes");
-                    break;
-                case 2:
-                    mostrarDetallesYCalcularAlimento(gestionador, "puma");
-                    break;
-                case 3:
-                    mostrarDetallesYCalcularAlimento(gestionador, "leopardo");
-                    break;
-                case 4:
-                    mostrarDetallesYCalcularAlimento(gestionador, "mono capuchino");
-                    break;
-                case 5:
-                    mostrarDetallesYCalcularAlimento(gestionador, "mono ardilla");
-                    break;
-                case 6:
-                    mostrarDetallesYCalcularAlimento(gestionador, "tamarin");
-                    break;
-                case 7:
-                    System.out.println("Saliendo...");
-                    break;
-                default:
-                    System.out.println("Opción no válida. Intente nuevamente.");
-            }
-        } while (opcion != 7);
+            System.out.print("Nombre científico: ");
+            String nombreCientifico = scanner.nextLine();
+            System.out.print("Hábitat: ");
+            String habitat = scanner.nextLine();
+            System.out.print("Esperanza de vida (años): ");
+            int esperanzaDeVida = scanner.nextInt();
+            scanner.nextLine();  // Consumir el salto de línea
+            System.out.print("Tipo de pelaje (Corto/Largo/Grueso/Ausente): ");
+            String tipoPelaje = scanner.nextLine();
+            System.out.print("Cantidad de crías por camada: ");
+            int cantidadCrias = scanner.nextInt();
+            System.out.print("Peso (kg): ");
+            double peso = scanner.nextDouble();
+            System.out.print("Tiempo de gestación (meses): ");
+            int tiempoGestacion = scanner.nextInt();
+            System.out.print("¿Está en peligro de extinción? (true/false): ");
+            boolean enPeligro = scanner.nextBoolean();
+            scanner.nextLine();  // Consumir el salto de línea
+            System.out.print("Dieta (Carnivoro/Omnívoro): ");
+            String dieta = scanner.nextLine();
+            System.out.print("Especie: ");
+            String especie = scanner.nextLine();
+            System.out.print("Longitud de la cola (cm): ");
+            int longitudCola = scanner.nextInt();
+            System.out.print("Velocidad máxima (km/h): ");
+            double velocidadMaxima = scanner.nextDouble();
+
+            // Crear el felino con los datos ingresados
+            mamifero = new Felinos(nombreCientifico, habitat, esperanzaDeVida, tipoPelaje, cantidadCrias, peso, tiempoGestacion, enPeligro, dieta, especie, longitudCola, velocidadMaxima);
+
+        } else if (tipoAnimal == 'P') {
+            // Si es primate, ingresar datos específicos del primate
+            System.out.println("\n============================");
+            System.out.println("  Ingrese los datos del primate");
+            System.out.println("============================");
+
+            System.out.print("Nombre científico: ");
+            String nombreCientifico = scanner.nextLine();
+            System.out.print("Hábitat: ");
+            String habitat = scanner.nextLine();
+            System.out.print("Esperanza de vida (años): ");
+            int esperanzaDeVida = scanner.nextInt();
+            scanner.nextLine();  // Consumir el salto de línea
+            System.out.print("Tipo de pelaje (Corto/Largo/Grueso/Ausente): ");
+            String tipoPelaje = scanner.nextLine();
+            System.out.print("Cantidad de crías por camada: ");
+            int cantidadCrias = scanner.nextInt();
+            System.out.print("Peso (kg): ");
+            double peso = scanner.nextDouble();
+            System.out.print("Tiempo de gestación (meses): ");
+            int tiempoGestacion = scanner.nextInt();
+            System.out.print("¿Está en peligro de extinción? (true/false): ");
+            boolean enPeligro = scanner.nextBoolean();
+            scanner.nextLine();  // Consumir el salto de línea
+            System.out.print("Dieta (Carnivoro/Omnivoro): ");
+            String dieta = scanner.nextLine();
+            System.out.print("Especie: ");
+            String especie = scanner.nextLine();
+            System.out.print("Estructura social (Solitario/Grupal/Familiar/Jerárquico): ");
+            String estructuraSocial = scanner.nextLine();
+            System.out.print("Nivel de inteligencia (1-100): ");
+            int nivelInteligencia = scanner.nextInt();
+            System.out.print("Tamaño del cerebro (gramos): ");
+            double tamanoCerebro = scanner.nextDouble();
+
+            // Crear el primate con los datos ingresados
+            mamifero = new Primates(nombreCientifico, habitat, esperanzaDeVida, tipoPelaje, cantidadCrias, peso, tiempoGestacion, enPeligro, dieta, especie, estructuraSocial, nivelInteligencia, tamanoCerebro);
+        } else {
+            System.out.println("Tipo de animal no válido.");
+            return;  // Salir si no se ingresa un tipo válido
+        }
+
+        // Mostrar los datos del animal ingresado
+        imprimirDatosMamiferoBonitos(mamifero.toString());
+
+        // Paso 3: Calcular si el presupuesto es suficiente
+        double costoRecinto = mamifero.calcularEspacioRecintoValor() * 13000;  // Costo del recinto (13000 por metro)
+        double costoComidaAnual = mamifero.calcularCostoComidaAnual();  // Costo anual de la comida
+        double costoMantenimientoDiario = (mamifero.calcularEspacioRecintoValor() > 100) ? 400 : ((mamifero.calcularEspacioRecintoValor() > 50) ? 250 : 100);  // Costo de mantenimiento diario
+        double costoMantenimientoAnual = costoMantenimientoDiario * 365;  // Mantenimiento anual
+        double costoTotalAnual = costoRecinto + costoComidaAnual + costoMantenimientoAnual;
+
+        // Mostrar los costos calculados
+        System.out.println("\n============================");
+        System.out.println("  Cálculos de Costo");
+        System.out.println("============================");
+        System.out.println("Costo del recinto: Q" + costoRecinto);
+        System.out.println("Costo de comida anual: Q" + costoComidaAnual);
+        System.out.println("Costo de mantenimiento anual: Q" + costoMantenimientoAnual);
+        System.out.println("Costo total anual: Q" + costoTotalAnual);
+
+        // Paso 4: Determinar si el presupuesto alcanza
+        System.out.println("\n============================");
+        System.out.println("  Recomendación");
+        System.out.println("============================");
+
+        if (costoTotalAnual <= presupuesto) {
+            System.out.println("Recomendación: El presupuesto alcanza. Se recomienda aceptar al animal.");
+        } else {
+            System.out.println("Recomendación: El presupuesto no alcanza. Se recomienda no aceptar al animal.");
+        }
+
+        // Paso 5: Preguntar si el usuario aceptará al animal
+        System.out.print("¿Desea aceptar al animal? (S/N): ");
+        char aceptar = scanner.next().toUpperCase().charAt(0);
+
+        // Paso 6: Mostrar mensaje final
+        System.out.println("\n============================");
+        System.out.println("  Resultado ");
+        System.out.println("============================");
+        if (aceptar == 'S') {
+            System.out.println("El animal SI ha sido aceptado.");
+        } else {
+            System.out.println("El animal NO ha sido aceptado.");
+        }
 
         scanner.close();
     }
 
-    /**
-    * Muestra los detalles del mamífero seleccionado y calcula la cantidad de alimento diario.
-    * @param gestionador El gestionador que maneja los mamíferos.
-    * @param clave La clave del mamífero que se seleccionó.
-    */
-    private static void mostrarDetallesYCalcularAlimento(Gestionador gestionador, String clave) {
-        System.out.println("\nDetalles del mamífero:");
-        System.out.println(gestionador.mostrarDatosMamifero(clave));
-        System.out.println("\n" + gestionador.calcularAlimento(clave));
+    // Método para imprimir los datos de manera visualmente atractiva
+    private static void imprimirDatosMamiferoBonitos(String datos) {
+        System.out.println("\n============================");
+        System.out.println("  Información del Mamífero");
+        System.out.println("============================");
+        String[] lineas = datos.split(", ");
+        for (String linea : lineas) {
+            System.out.println("| " + linea);
+        }
+        System.out.println("============================\n");
     }
 }

@@ -4,61 +4,70 @@
 * CC2008
 * AUTOR: Denil Parada
 * FECHA: 26/09/2024 
-* DESCRIPCION: Clase que representa a un felino, hereda de Mamifero y agrega detalles específicos como especie y color de pelaje.
+* DESCRIPCION: Clase que representa un felino, incluye detalles como el tamaño, longitud de la cola y velocidad máxima.
 */
 public class Felinos extends Mamifero {
     private String especie;
-    private String colorPelaje;
+    private int longitudCola;
+    private double velocidadMaxima;
 
-    /**
-    * Constructor de la clase Felinos.
-    * @param nombreCientifico Nombre científico del felino.
-    * @param habitat El hábitat donde vive.
-    * @param esperanzaDeVida La esperanza de vida del felino.
-    * @param peso Peso en kilogramos del felino.
-    * @param tiempoDeGestacion Tiempo de gestación en meses.
-    * @param enPeligroDeExtincion Indica si el felino está en peligro de extinción.
-    * @param especie Especie del felino.
-    * @param colorPelaje Color del pelaje del felino.
-    */
-    public Felinos(String nombreCientifico, String habitat, int esperanzaDeVida, double peso, int tiempoDeGestacion, boolean enPeligroDeExtincion, String especie, String colorPelaje) {
-        super(nombreCientifico, habitat, esperanzaDeVida, peso, tiempoDeGestacion, enPeligroDeExtincion);
+    // Constructor
+    public Felinos(String nombreCientifico, String habitat, int esperanzaDeVida, String tipoPelaje, int cantidadCrias, double peso, int tiempoDeGestacion, boolean enPeligroDeExtincion, String dieta, String especie, int longitudCola, double velocidadMaxima) {
+        super(nombreCientifico, habitat, esperanzaDeVida, tipoPelaje, cantidadCrias, peso, tiempoDeGestacion, enPeligroDeExtincion, dieta);
         this.especie = especie;
-        this.colorPelaje = colorPelaje;
+        this.longitudCola = longitudCola;
+        this.velocidadMaxima = velocidadMaxima;
     }
 
-    /**
-    * Calcula el consumo diario de alimentos basado en el peso del felino y su especie.
-    * @return Una cadena con el rango de gramos de comida que necesita el felino.
-    */
-    public String calcularAlimentoDiario() {
-        double rangoMin = 0, rangoMax = 0;
-        switch (especie.toLowerCase()) {
+    // Implementación del cálculo del espacio del recinto
+    @Override
+    public double calcularEspacioRecintoValor() {
+        switch (especie.trim().toLowerCase()) {
             case "gato montes":
-                rangoMin = 20;
-                rangoMax = 30;
-                break;
+                return 50;  // metros cuadrados
             case "puma":
-                rangoMin = 25;
-                rangoMax = 35;
-                break;
+                return 100;  // metros cuadrados
             case "leopardo":
-                rangoMin = 25;
-                rangoMax = 35;
-                break;
+                return 150;  // metros cuadrados
             default:
-                return "Especie desconocida. No se puede calcular el alimento.";
+                return 0;
         }
-        double consumoMin = (peso * rangoMin);
-        double consumoMax = (peso * rangoMax);
-        return "Consumo diario de alimentos: " + consumoMin + " - " + consumoMax + " g";
     }
 
-    /**
-    * Devuelve los datos completos del felino.
-    * @return Una cadena con los datos del felino, incluyendo especie y color de pelaje.
-    */
-    public String getDatosFelino() {
-        return getDatosMamifero() + "\nEspecie: " + especie + "\nColor de pelaje: " + colorPelaje;
+    // Implementación del cálculo del costo de comida anual
+    @Override
+    public double calcularCostoComidaAnual() {
+        double costoPorDia = (dieta.equalsIgnoreCase("Carnivoro")) ? 25 : 20;
+        return costoPorDia * 365;  // Costo de comida al año
+    }
+
+    // Getters y Setters
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public int getLongitudCola() {
+        return longitudCola;
+    }
+
+    public void setLongitudCola(int longitudCola) {
+        this.longitudCola = longitudCola;
+    }
+
+    public double getVelocidadMaxima() {
+        return velocidadMaxima;
+    }
+
+    public void setVelocidadMaxima(double velocidadMaxima) {
+        this.velocidadMaxima = velocidadMaxima;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Especie: " + especie + ", Longitud de la cola: " + longitudCola + " cm, Velocidad máxima: " + velocidadMaxima + " km/h";
     }
 }

@@ -4,61 +4,81 @@
 * CC2008
 * AUTOR: Denil Parada
 * FECHA: 26/09/2024 
-* DESCRIPCION: Clase que representa a un primate, hereda de Mamifero y agrega detalles como la especie y el nivel de inteligencia.
+* DESCRIPCION: Clase que representa un primate, incluye detalles como la estructura social y el nivel de inteligencia.
 */
 public class Primates extends Mamifero {
     private String especie;
+    private String estructuraSocial;
     private int nivelInteligencia;
+    private double tamanoCerebro;
 
-    /**
-    * Constructor de la clase Primates.
-    * @param nombreCientifico Nombre científico del primate.
-    * @param habitat El hábitat donde vive.
-    * @param esperanzaDeVida La esperanza de vida del primate.
-    * @param peso Peso en kilogramos del primate.
-    * @param tiempoDeGestacion Tiempo de gestación en meses.
-    * @param enPeligroDeExtincion Indica si el primate está en peligro de extinción.
-    * @param especie Especie del primate.
-    * @param nivelInteligencia Nivel de inteligencia en una escala del 1 al 100.
-    */
-    public Primates(String nombreCientifico, String habitat, int esperanzaDeVida, double peso, int tiempoDeGestacion, boolean enPeligroDeExtincion, String especie, int nivelInteligencia) {
-        super(nombreCientifico, habitat, esperanzaDeVida, peso, tiempoDeGestacion, enPeligroDeExtincion);
+    // Constructor
+    public Primates(String nombreCientifico, String habitat, int esperanzaDeVida, String tipoPelaje, int cantidadCrias, double peso, int tiempoDeGestacion, boolean enPeligroDeExtincion, String dieta, String especie, String estructuraSocial, int nivelInteligencia, double tamanoCerebro) {
+        super(nombreCientifico, habitat, esperanzaDeVida, tipoPelaje, cantidadCrias, peso, tiempoDeGestacion, enPeligroDeExtincion, dieta);
         this.especie = especie;
+        this.estructuraSocial = estructuraSocial;
+        this.nivelInteligencia = nivelInteligencia;
+        this.tamanoCerebro = tamanoCerebro;
+    }
+
+    // Implementación del cálculo del espacio del recinto
+    @Override
+    public double calcularEspacioRecintoValor() {
+        switch (especie.toLowerCase()) {
+            case "mono capuchino":
+                return 25;  // metros cuadrados
+            case "macaco":
+                return 100;  // metros cuadrados
+            case "gorila":
+                return 400;  // metros cuadrados
+            default:
+                return 0;
+        }
+    }
+
+    // Implementación del cálculo del costo de comida anual
+    @Override
+    public double calcularCostoComidaAnual() {
+        double costoPorDia = (dieta.equalsIgnoreCase("Carnivoro")) ? 25 : 20;
+        return costoPorDia * 365;  // Costo de comida al año
+    }
+
+    // Getters y Setters
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public String getEstructuraSocial() {
+        return estructuraSocial;
+    }
+
+    public void setEstructuraSocial(String estructuraSocial) {
+        this.estructuraSocial = estructuraSocial;
+    }
+
+    public int getNivelInteligencia() {
+        return nivelInteligencia;
+    }
+
+    public void setNivelInteligencia(int nivelInteligencia) {
         this.nivelInteligencia = nivelInteligencia;
     }
 
-    /**
-    * Calcula el consumo diario de alimentos basado en el peso del primate y su especie.
-    * @return Una cadena con el rango de gramos de comida que necesita el primate.
-    */
-    public String calcularAlimentoDiario() {
-        double rangoMin = 0, rangoMax = 0;
-        switch (especie.toLowerCase()) {
-            case "mono capuchino":
-                rangoMin = 25;
-                rangoMax = 35;
-                break;
-            case "mono ardilla":
-                rangoMin = 20;
-                rangoMax = 30;
-                break;
-            case "tamarin":
-                rangoMin = 15;
-                rangoMax = 25;
-                break;
-            default:
-                return "Especie desconocida. No se puede calcular el alimento.";
-        }
-        double consumoMin = (peso * rangoMin);
-        double consumoMax = (peso * rangoMax);
-        return "Consumo diario de alimentos: " + consumoMin + " - " + consumoMax + " g";
+    public double getTamanoCerebro() {
+        return tamanoCerebro;
     }
 
-    /**
-    * Devuelve los datos completos del primate.
-    * @return Una cadena con los datos del primate, incluyendo especie y nivel de inteligencia.
-    */
-    public String getDatosPrimate() {
-        return getDatosMamifero() + "\nEspecie: " + especie + "\nNivel de inteligencia: " + nivelInteligencia + "/100";
+    public void setTamanoCerebro(double tamanoCerebro) {
+        this.tamanoCerebro = tamanoCerebro;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Especie: " + especie + ", Estructura social: " + estructuraSocial + 
+               ", Nivel de inteligencia: " + nivelInteligencia + "/100, Tamaño del cerebro: " + tamanoCerebro + " gramos";
     }
 }
