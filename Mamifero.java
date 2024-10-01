@@ -79,6 +79,7 @@ public abstract class Mamifero extends Animal {
         this.dieta = dieta;
     }
 
+    // toString
     @Override
     public String toString() {
         return super.toString() + ", Tipo de pelaje: " + tipoPelaje + ", Crías por camada: " + cantidadCrias + 

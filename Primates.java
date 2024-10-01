@@ -76,6 +76,7 @@ public class Primates extends Mamifero {
         this.tamanoCerebro = tamanoCerebro;
     }
 
+    // toString
     @Override
     public String toString() {
         return super.toString() + ", Especie: " + especie + ", Estructura social: " + estructuraSocial + 

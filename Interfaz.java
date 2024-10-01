@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class Interfaz {
     public static void main(String[] args) {
-        Gestionador gestionador = new Gestionador();
         Scanner scanner = new Scanner(System.in);
 
         // Paso 1: Ingresar el presupuesto anual
@@ -99,6 +98,7 @@ public class Interfaz {
             mamifero = new Primates(nombreCientifico, habitat, esperanzaDeVida, tipoPelaje, cantidadCrias, peso, tiempoGestacion, enPeligro, dieta, especie, estructuraSocial, nivelInteligencia, tamanoCerebro);
         } else {
             System.out.println("Tipo de animal no válido.");
+            scanner.close();
             return;  // Salir si no se ingresa un tipo válido
         }
 

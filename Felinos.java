@@ -66,6 +66,7 @@ public class Felinos extends Mamifero {
         this.velocidadMaxima = velocidadMaxima;
     }
 
+    // toString
     @Override
     public String toString() {
         return super.toString() + ", Especie: " + especie + ", Longitud de la cola: " + longitudCola + " cm, Velocidad máxima: " + velocidadMaxima + " km/h";
